@@ -113,6 +113,7 @@ public class EntityProxyCache extends Manager {
 		if (entity.getComponent(VisText.class) != null) return new TextProxy(entity);
 		if (entity.getComponent(Point.class) != null) return new PointProxy(entity, pixelsPerUnit);
 		if (entity.getComponent(VisSprite.class) != null) return new SpriteProxy(entity);
+		if (entity.getComponent(GraphWay.class) != null) return new GraphWayProxy(entity);
 
 		return null;
 	}

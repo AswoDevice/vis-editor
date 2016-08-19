@@ -21,10 +21,7 @@ import com.kotcrab.vis.editor.assets.transaction.AssetTransactionGenerator;
 import com.kotcrab.vis.editor.assets.transaction.generator.*;
 import com.kotcrab.vis.editor.extension.AssetType;
 import com.kotcrab.vis.editor.extension.DefaultExporter;
-import com.kotcrab.vis.editor.module.scene.entitymanipulator.tool.PolygonTool;
-import com.kotcrab.vis.editor.module.scene.entitymanipulator.tool.RotateTool;
-import com.kotcrab.vis.editor.module.scene.entitymanipulator.tool.ScaleTool;
-import com.kotcrab.vis.editor.module.scene.entitymanipulator.tool.SelectionTool;
+import com.kotcrab.vis.editor.module.scene.entitymanipulator.tool.*;
 import com.kotcrab.vis.editor.plugin.api.ComponentTableProvider;
 import com.kotcrab.vis.editor.plugin.api.ToolProvider;
 import com.kotcrab.vis.editor.plugin.api.UserAddableComponentProvider;
@@ -76,6 +73,7 @@ public class DefaultExtensionRegistrarModule extends EditorModule {
 		toolReg.accept(new ReflectionToolProvider<>(RotateTool.class));
 		toolReg.accept(new ReflectionToolProvider<>(ScaleTool.class));
 		toolReg.accept(new ReflectionToolProvider<>(PolygonTool.class));
+		toolReg.accept(new ReflectionToolProvider<>(GraphWayTool.class));
 
 		Consumer<ComponentTableProvider> compTableReg = provider -> extensionStorage.addComponentTableProvider(provider);
 		compTableReg.accept(sceneMC -> new RenderableComponentTable(sceneMC));
@@ -83,12 +81,14 @@ public class DefaultExtensionRegistrarModule extends EditorModule {
 		compTableReg.accept(sceneMC -> new AutoComponentTable<>(sceneMC, VisPolygon.class, true));
 		compTableReg.accept(sceneMC -> new PhysicsPropertiesComponentTable(sceneMC));
 		compTableReg.accept(sceneMC -> new AutoComponentTable<>(sceneMC, Variables.class, true));
+		compTableReg.accept(sceneMC -> new AutoComponentTable<>(sceneMC, GraphWay.class, true));
 		compTableReg.accept(sceneMC -> new AutoComponentTable<>(sceneMC, VisMusic.class, false));
 		compTableReg.accept(sceneMC -> new AutoComponentTable<>(sceneMC, VisSound.class, false));
 		compTableReg.accept(sceneMC -> new AutoComponentTable<>(sceneMC, VisParticle.class, false));
 		compTableReg.accept(sceneMC -> new TextPropertiesComponentTable(sceneMC));
 
 		Consumer<UserAddableComponentProvider> userAddCompReg = provider -> extensionStorage.addUserAddableComponentProvider(provider);
+		userAddCompReg.accept(() -> GraphWay.class);
 		userAddCompReg.accept(() -> Shader.class);
 		userAddCompReg.accept(() -> VisPolygon.class);
 		userAddCompReg.accept(() -> PhysicsProperties.class);

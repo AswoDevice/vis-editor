@@ -57,6 +57,7 @@ public class RuntimeJsonTags {
 		registrar.register("Variables", Variables.class);
 		registrar.register("PhysicsProperties", PhysicsProperties.class);
 		registrar.register("Point", Point.class);
+		registrar.register("GraphWay", GraphWay.class);
 
 		registrar.register("ProtoVisSprite", ProtoVisSprite.class);
 		registrar.register("ProtoVisMusic", ProtoVisMusic.class);
